@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html
+<head>
+   <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+   <title>Visas</title>
+<!-- libs to go online
+      <script src="http://d3js.org/d3.v3.min.js"></script>
+      <script src="http://d3js.org/queue.min.js"></script>
+      <script src="http://d3js.org/d3.geo.projection.v0.min.js"></script>
+      <script src="http://d3js.org/topojson.v0.min.js"></script>
+   -->
+   <!-- local libs
+-->
+<script src="js/d3.min.js"></script>
+<script src="js/queue.min.js"></script>
+<script src="js/topojson.v1.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
+<script type="text/javascript" src="js/typeahead.jquery.min.js"></script>
+<!--
+   <script src="../../../lib/d3.geo.projection.v0.min.js"></script>
+   <script src="../../../lib/topojson.v0.min.js"></script>
+-->
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1> Paper that has been seen </h1>
+  </header>
+  <div id="intro">
+    <p>
+      In this visualizations, I explore the visa data of 232 countries. Looking at the visa requirements between countries, we find couple of interesting insights. These insights are illustrated below as steps of presentation. Visa-free in this context is used as a country not requiring visa for the citizens of selected country.
+    </p>
+    <p>
+      The map and other elements are interactive. So feel free to explore the visualization yourself - or check out my observations by going through the steps.
+    </p>
+  </div>
+  <div id ="explanation">
+    <div id="annotation-steps">
+      <div class="annotation-step" id="annotation-step1" style="display:block;">
+        <h4> Title </h4>
+        <p> Initially, in the below map countries are colored based on the amount of visa-free countries. Darker green means higher amount of countries that the citizens can freely travel to (without a visa). </p>
+      </div>
+      <div class="annotation-step" id="annotation-step2">
+        <h4> Citizens of EU countries and New Zealand enjoy visa-free travel </h4>
+        <p> European Union countries and New Zealand are the top 5% of countries that have the highest visa-free countries. The citizens of these countries are able to travel to more than 138 countries without any visa necessary. </p>
+      </div>
+      <div class="annotation-step" id="annotation-step3">
+        <h4> EU has common visa-free countries </h4>
+        <p> We see more or less the same group of visa-free countries for the EU. Probably this is related to EU wide regulations with those visa-free countries - and the economic relationships of EU. In the map visa-free countries are colored in blue while the countries requiring visas are shown as grey - for the selected country in orange. </p>
+      </div>
+      <div class="annotation-step" id="annotation-step4">
+        <h4> Afghanistan has the lowest visa-free countries </h4>
+        <p> In contrast, Afghanistan citizens can travel to only 14 countries without a visa. And almost none of them are visible in our map view. We could hardly see that Haiti and Kosovo don't require visa from Afghan citizens. Interesting to see that Haiti and Kosovo also are among the countries with having the lowest visa-free countries. </p>
+      </div>
+      <div class="annotation-step" id="annotation-step5">
+        <h4> Communities based on visa data </h4>
+        <p> Explanation text hodo hodo </p>
+      </div>
+      <div class="annotation-step" id="annotation-step6">
+        <h4> Title 6 </h4>
+        <p> Explanation text hodo hodo </p>
+      </div>
+    </div>
+    <div id="annotation-navigation">
+      <ul>
+        <li class="step-link active" id="step1"> 1 </li>
+        <li class="step-link" id="step2"> 2 </li>
+        <li class="step-link" id="step3"> 3 </li>
+        <li class="step-link" id="step4"> 4 </li>
+        <li class="step-link" id="step5"> 5 </li>
+        <li class="step-link" id="step6"> 6 </li>
+      </ul>
+      <div id="annotation-nav-buttons">
+<!--
+        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-left"></span> </button>
+        <button type="button" class="btn btn-primary"> <span class="glyphicon glyphicon-arrow-right"></span></button>
+ -->
+        <div class="arrow arrow-left"></div>
+        <div class="arrow arrow-right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="viz-container">
+    <div id="buttons" class="btn-group">
+      <button type="button" class="overall btn btn-default btn-lg active"> Overall Look </button>
+      <button type="button" class="community btn btn-default btn-lg"> Communities </button>
+    </div>
+    <div id ="legendArea">
+      <div id="legend"> </div>
+      <div id="communitiesLegend">
+        <text> Color shows communities found by visa relations </text>
+      </div>
+    </div>
+    <div id="country-selector">
+      <input class="typeahead" type="text" placeholder="Find a country">
+      <span class="clear-selector"> x <span>
+    </div>
+    <div class="clear-left"></div>
+    <div id="map"></div>
+    <div id="tooltip" class="hidden">
+      <p class="title"/>
+      <p class="subtitle"/>
+    </div>
+  </div>
+<!--    <div id="footer">
+      Built with <a href="http://d3js.org/">D3</a>
+   </div> -->
+  <script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>

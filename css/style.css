@@ -1,0 +1,335 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:400, 700);
+
+body {
+  font-family: "Lato", "Helvetica Neue", sans-serif;
+  margin: 40px auto;
+  /* FIXME: don't set these for responsive design */
+  width: 1080px;
+  min-height: 1200px;
+
+/*
+  min-width: 600px;
+  min-height: 300px;*/
+}
+
+header {
+  border-bottom: 1px solid #6c6c6c;
+  width: 360px;
+  position: relative;
+  margin: 10px 10%;
+}
+h1 { font-size: 24px; font-weight: normal; text-shadow: #fff 0 1px 0; margin: 0 0 0 0; padding: 0; }
+h2 { font-size: 16px; font-weight: normal; text-shadow: #fff 0 1px 0; margin: 0 0 0 0; padding: 0; }
+small { color: #a3a3a3; font-size: 10px; position: absolute; top: 0.6em; right: 0;}
+a { color: #a3a3a3; }
+
+
+#intro {
+  height: 150px;
+  margin: 10px 10%;
+}
+
+
+/* Styling for annotation elements */
+#explanation {
+  height: 200px;
+  margin: 10px 10%;
+}
+
+#annotation-steps {
+  width: 600px;
+  float: left;
+}
+
+  /* By default all annotation-steps are hidden */
+.annotation-step {
+  display: none;
+}
+
+#annotation-navigation {
+  width: 200px;
+  float: left;
+}
+
+#annotation-navigation ul {
+  float: left;
+  list-style-type: none;
+}
+
+li.step-link {
+  float: left;
+  padding-left: 6px;
+  padding-right: 6px;
+  color: #acacac;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+li.step-link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  background-color: #efefef;
+  color: #555;
+}
+
+li.step-link.active {
+  font-weight: bold;
+  color: #222;
+}
+
+li.step-link.active:hover {
+  text-decoration: none;
+  cursor: default;
+  background: none;
+  color: #222;
+}
+
+#annotation-nav-buttons {
+  margin-left: 20px;
+  float: left;
+}
+
+div.arrow {
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+
+  float:left;
+  margin-right: 12px;
+
+  cursor: pointer;
+}
+
+
+div.arrow-left {
+  border-right:12px solid #acacac;
+}
+
+div.arrow-left:hover {
+  border-right:12px solid #555;
+}
+
+div.arrow-right {
+  border-left:12px solid #acacac;
+}
+
+div.arrow-right:hover {
+  border-left:12px solid #555;
+}
+
+
+#viz-container {
+  margin:10px 10%;
+  height:100%;
+}
+
+#map {
+  overflow:hidden;
+  border:2px solid #000;
+  border-radius: 5px;
+  background: #F0F8FF;
+}
+
+.country {
+  fill: #ccc;
+  stroke: #fff;
+  stroke-width: .5px;
+}
+
+.country:hover, .country.selected {
+  stroke-width: 1.2px;
+  stroke-linejoin: round;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Force Layout styling */
+#network .node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+  fill: blue;
+}
+
+#network .link {
+  stroke: #999;
+  stroke-opacity: .6;
+  stroke-width: 0.5px;
+}
+
+#tooltip {
+  color: #222;
+  background: #fff;
+  padding: 4px;
+  text-shadow: #f5f5f5 0 1px 0;
+  border-radius: 2px;
+  -moz-border-radius: 2px 2px 2px 2px;
+  -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
+  -webkit-box-shadow: 0px 0px 2px 0px #a6a6a6;
+  -moz-box-shadow: 0px 0px 2px 0px #a6a6a6;
+  box-shadow: 0px 0px 2px 0px #a6a6a6;
+  opacity: 0.9;
+  position: absolute;
+}
+
+#tooltip p {
+  text-align: center;
+  vertical-align: middle;
+}
+
+#tooltip p.title {
+  color: #222;
+  font-size: 15px;
+ /* line-height: 24px;*/
+  font-weight: bold;
+}
+
+#tooltip p.subtitle {
+  color: #222;
+  font-size: 12px;
+ /* line-height: 18px;*/
+}
+
+/* Styling for Button group*/
+#buttons {
+  float: left;
+}
+
+#buttons button.active {
+  font-weight: 800;
+}
+
+/* Styling for the Country Selector*/
+
+#country-selector {
+  margin-bottom: 20px;
+  /* width: 300px; */
+  float: right;
+}
+
+.tt-query,
+.tt-hint {
+    width: 206px;
+    height: 30px;
+    padding: 8px 12px;
+    font-size: 18px;
+    line-height: 30px;
+    border: 2px solid #ccc;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    outline: none;
+}
+
+/* extra space provided for span.clear-selector */
+input.typeahead.tt-input {
+  padding-right: 20px;
+}
+
+.tt-query {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+#country-selector .tt-hint {
+    color: #999
+}
+
+.tt-dropdown-menu {
+    width: 422px;
+    margin-top: 4px;
+    padding: 8px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+    padding: 3px 20px;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.tt-suggestion.tt-is-under-cursor {
+    color: #fff;
+    background-color: #0097cf;
+
+}
+
+.tt-suggestion p {
+    margin: 0;
+}
+
+span.clear-selector {
+  position: absolute;
+  font-size: 12px;
+  cursor: default;
+  visibility: hidden;
+}
+
+span.clear-selector.selected {
+  visibility:  visible;
+}
+
+/* Styling for the Visa Sums Legend*/
+
+#legendArea {
+  width:250px;
+  height:80px;
+  float: left;
+  font-size: 12px;
+  margin-left: 80px;
+  margin-right: 40px;
+}
+
+#legend.hidden {
+  visibility: hidden;
+}
+
+.caption {
+  font-weight: bold;
+}
+
+.visaSumsKey path {
+  display: none;
+}
+
+.visaSumsKey line {
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.clear-left {
+  clear:left;
+}
+
+#communitiesLegend {
+  width: 150px;
+  font-weight: bold;
+  visibility: hidden;
+}
+
+#communitiesLegend.visible {
+  visibility: visible;
+}
+
+/* SVG */
+
+g.mapG path,
+g#infobox,
+g#zoomIn,
+g#zoomOut,
+g#infoButton {
+  cursor: pointer;
+}
