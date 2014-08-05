@@ -207,6 +207,9 @@ function drawMap(countryData) {
       Viz.get("tooltip").classed("hidden", true);
     })
     .on("click", function(d, i) {
+      // Don't select if no visa information available
+      if (d.visaID < 0) return;
+
       stopAnimation();
       // Update typeahead
       $('.typeahead').typeahead('val', d.properties.name);
@@ -339,10 +342,7 @@ function toggleMapView(_this){
 // Update country colors based on visa requirement
 function selectCountry(selectedCountry){
   // Don't do anything if no visa data available
-  // FIXME: how to display this to the user?
-  if (selectedCountry.visaID == -1) {
-    return;
-  }
+  if (selectedCountry.visaID == -1) return;
 
   var country = d3.selectAll("#map .country");
 
