@@ -163,9 +163,19 @@ function ready(error, world, visas, countryCommunities, filterCountries) {
     selectStep(clickedStep);
   });
 
-  d3.selectAll("#annotation-nav-buttons arrow").on("click", function() {
+  // Step switcher via arrow clicks
+  d3.selectAll("#annotation-nav-buttons .arrow").on("click", function() {
+    var totalSteps = d3.selectAll("li.step-link")[0].length;
     var currentStep = d3.select("li.step-link.active").attr("id");
-    // TODO: add step switcher via arrow clicks
+    var stepNum = parseInt(currentStep.split("step")[1]);
+
+    // Find which button is clicked
+    var isRight = d3.event.target.className.indexOf("arrow-right") >= 0;
+    var newStepNum = isRight ? stepNum+1 : stepNum -1;
+
+    var newStep = "step" + (newStepNum ? (newStepNum > totalSteps ? 1 : newStepNum) : totalSteps);
+
+    selectStep(newStep);
   })
 }
 
