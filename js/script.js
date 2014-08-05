@@ -195,13 +195,38 @@ function drawMap(countryData) {
 
   country
     .on("mousemove", function(d,i) {
+      var selectedCountry = Viz.has("previousCountry") ? Viz.get("previousCountry") : '';
+
+      // Tooltip title is hover-over country name
+      var countryNameTitle = '<p class="title">'+ d.properties.name + '</p>'
+
+      // First tooltip subtitle is visa-sums information
+      var visaSumsSubtitle = '<p class="subtitle">No visa information available</p>';;
+
+      // Second tooltip subtitle is visa requirement information for the selected country citizens
+      var visaReqSubtitle = '';
+
+      if (d.visaID >= 0) {
+        visaSumsSubtitle = [
+          '<p class="subtitle">',
+          Viz.get("mapState") === "visaSums" ? d.visaSums + " visa-free countries" : "",
+          '</p>'
+        ].join('');
+      }
+
+      if (d.visaID >= 0 && selectedCountry && d !== selectedCountry) {
+        visaReqSubtitle = [
+          '<p class="subtitle"> Visa ',
+          '<strong>',
+          (selectedCountry.visas[d.visaID] === 0 ? 'required' : 'free'),
+          '</strong>',
+          ' for citizens of ' + selectedCountry.properties.name + '</p>'
+        ].join('');
+      }
+
       Viz.get("tooltip").classed("hidden", false)
           .attr("style", "left:"+(d3.event.pageX + 10)+"px;top:"+(d3.event.pageY + 15)+"px")
-          //.html(d.properties.name);
-          .html([
-            '<p class="title">'+ d.properties.name + '</p>',
-            '<p class="subtitle">'+ (Viz.get("mapState") === "visaSums" ? d.visaSums + " visa-free countries" : "") + '</p>'
-          ].join(''));
+          .html(countryNameTitle + visaSumsSubtitle + visaReqSubtitle);
     })
     .on("mouseout",  function(d,i) {
       Viz.get("tooltip").classed("hidden", true);
