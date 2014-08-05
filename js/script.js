@@ -1,7 +1,6 @@
 // TODO:
 // package all under namespace
 // complete steps
-// fix animation - interaction conflicts
 // fix all fixme and todo items
 
 // Alert for not supported browsers
@@ -421,7 +420,7 @@ var fillVisaSumsColor =  function(d, i) {
 // Paint the countries based on the number of visa free countries each has
 // Default color mode
 function paintVisaSums() {
-  var country = Viz.get("mapSvg").selectAll("g.mapG path.country");
+  var country = d3.selectAll("#map .country");
 
   country
       //.transition().duration(500)
@@ -439,12 +438,11 @@ var fillCommunityColor =  function(d, i) {
 
 // Paint the countries based on the community they belong to
 function paintCommunities() {
-  var country = Viz.get("mapSvg").selectAll("g.mapG path.country");
+  var country = d3.selectAll("#map .country");
 
   country
-      //.transition().duration(0)
       .style("opacity", 1)
-      .style("fill", fillCommunityColor)
+      .style("fill", fillCommunityColor);
 
   // Hide the visa sums percentiles legend
   d3.select("#visaPercLegend").classed("hidden", true);
