@@ -126,7 +126,7 @@ function ready(error, world, visas, countryCommunities, filterCountries) {
     .range(['#c7e9c0', '#a1d99b', '#74c476', '#41ab5d', '#238b45', '#005a32']);
 
   drawMap(countryData);
-  drawLegend();
+  drawVisaPercLegend();
 
   // Create the typeahead for comparison
   $('.typeahead')
@@ -318,11 +318,12 @@ function toggleMapView(_this){
   var overallSelected = d3.select(_this).classed("overall");
   // Detect which button is clicked
   if (overallSelected) {
-    paintVisaSums();
     Viz.set("mapState", "visaSums");
+    paintVisaSums();
   } else {
-    paintCommunities();
     Viz.set("mapState", "community");
+    paintCommunities();
+    hideSelectionLegend();
   }
 
   // Keep the selected country
@@ -365,6 +366,8 @@ function selectCountry(selectedCountry){
         .transition().duration(500)
         .style("fill", "#ff7f0e");
 
+      // Show the selection legend
+      showSelectionLegend();
   } else {
     // Community colors
 
@@ -425,8 +428,8 @@ function paintVisaSums() {
       .style("opacity", 1)
       .style("fill", fillVisaSumsColor)
 
-  // Display the legend
-  d3.select("#legend").classed("hidden", false);
+  // Display the visa sums percentiles legend
+  d3.select("#visaPercLegend").classed("hidden", false);
 }
 
 var fillCommunityColor =  function(d, i) {
@@ -443,13 +446,13 @@ function paintCommunities() {
       .style("opacity", 1)
       .style("fill", fillCommunityColor)
 
-  // Hide the VisaSums legend
-  d3.select("#legend").classed("hidden", true);
+  // Hide the visa sums percentiles legend
+  d3.select("#visaPercLegend").classed("hidden", true);
 }
 
-// Draw the legend
-function drawLegend() {
-  var svg = d3.select("#legend").append("svg");
+// Draw the visa sums percentiles legend
+function drawVisaPercLegend() {
+  var svg = d3.select("#visaPercLegend").append("svg");
 
   var g = svg.append("g")
     .attr("class", "visaSumsKey")
@@ -523,6 +526,27 @@ function drawLegend() {
     .text("Number of Visa Free Countries");
 }
 
+// Display the visa sums selection color legend
+function showSelectionLegend() {
+  d3.select("#visaSums-selection-legend").classed("selected", true);
+
+  // Paint typeahead to indicate selectio
+  d3.select(".typeahead.tt-input")
+    // first paint to white, else transition starts from black - due to initial transparent
+    .style("background-color", "white")
+    .transition().duration(750)
+    .style("background-color", "#ff7f0e");
+}
+
+// Hide the visa sums selection color legend
+function hideSelectionLegend() {
+  d3.select("#visaSums-selection-legend").classed("selected", false);
+
+  // Paint typeahead transparent to indicate deselection
+  d3.select(".typeahead.tt-input")
+    .style("background-color", "transparent");
+}
+
 // Reset typeahead selection
 function resetTypeahead() {
   d3.select("span.clear-selector")
@@ -535,6 +559,8 @@ function resetTypeahead() {
       .classed("selected", false);
 
   Viz.remove("previousCountry");
+
+  hideSelectionLegend();
 
   // Reset map colors based on the view
   // Default color mode

@@ -293,8 +293,43 @@ span.clear-selector.selected {
   margin-right: 40px;
 }
 
-#legend.hidden {
+#visaPercLegend.hidden {
   visibility: hidden;
+}
+
+#visaSums-selection-legend {
+  font-size: 12px;
+  float: right;
+  visibility: hidden;
+}
+
+#visaSums-selection-legend.selected {
+  visibility: visible;
+}
+
+#visaSums-selection-legend div {
+  width: 18px;
+  height: 18px;
+
+  float: left;
+  margin-top: 2px;
+  margin-left: 20px;
+  margin-right: 5px;
+
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+#visaSums-selection-legend div.free {
+  background-color: #1f77b4;
+}
+
+#visaSums-selection-legend div.required {
+  background-color: #ccc;
+}
+
+#visaSums-selection-legend text {
+  float: left;
 }
 
 .caption {
@@ -322,6 +357,15 @@ span.clear-selector.selected {
 
 #communitiesLegend.visible {
   visibility: visible;
+}
+
+/* Clear floats gracefully */
+.clearfix:after {
+   content: ".";
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
 }
 
 /* SVG */

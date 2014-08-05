@@ -84,21 +84,28 @@
     </div>
   </div>
   <div id="viz-container">
-    <div id="buttons" class="btn-group">
-      <button type="button" class="overall btn btn-default btn-lg active"> Overall Look </button>
-      <button type="button" class="community btn btn-default btn-lg"> Communities </button>
-    </div>
-    <div id ="legendArea">
-      <div id="legend"> </div>
-      <div id="communitiesLegend">
-        <text> Color shows communities found by visa relations </text>
+    <div class="clearfix">
+      <div id="buttons" class="btn-group">
+        <button type="button" class="overall btn btn-default btn-lg active"> Overall Look </button>
+        <button type="button" class="community btn btn-default btn-lg"> Communities </button>
+      </div>
+      <div id ="legendArea">
+        <div id="visaPercLegend"> </div>
+        <div id="communitiesLegend">
+          <text> Color shows communities found by visa relations </text>
+        </div>
+      </div>
+      <div id="country-selector">
+        <input class="typeahead" type="text" placeholder="Find a country">
+        <span class="clear-selector"> x <span>
+      </div>
+      <div id="visaSums-selection-legend">
+        <div class="free"></div>
+        <text> Visa Free </text>
+        <div class="required"></div>
+        <text> Visa Required </text>
       </div>
     </div>
-    <div id="country-selector">
-      <input class="typeahead" type="text" placeholder="Find a country">
-      <span class="clear-selector"> x <span>
-    </div>
-    <div class="clear-left"></div>
     <div id="map"></div>
     <div id="tooltip" class="hidden">
       <p class="title"/>
