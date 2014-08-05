@@ -577,6 +577,8 @@ function hideSelectionLegend() {
 
   // Paint typeahead transparent to indicate deselection
   d3.select(".typeahead.tt-input")
+    // transition is here just to make sure the previous transition is canceled
+    .transition().duration(750)
     .style("background-color", "transparent");
 }
 
