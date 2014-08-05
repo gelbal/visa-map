@@ -669,6 +669,20 @@ function drawVisaSumsDefault() {
   d3.select("#communitiesLegend").classed("visible", false);
 }
 
+// Default view for countries colored by communities
+function drawCommunitiesDefault() {
+  Viz.set("mapState", "community");
+  paintCommunities();
+
+  // De-select country selection
+  resetTypeahead();
+
+  // Update CSS
+  d3.select("button.overall").classed("active", false);
+  d3.select("button.community").classed("active", true);
+  d3.select("#communitiesLegend").classed("visible", true);
+}
+
 
 // Annotation steps defined
 var steps = {}
