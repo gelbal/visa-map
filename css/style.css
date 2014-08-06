@@ -5,11 +5,7 @@ body {
   margin: 40px auto;
   /* FIXME: don't set these for responsive design */
   width: 1080px;
-  min-height: 1200px;
-
-/*
-  min-width: 600px;
-  min-height: 300px;*/
+  min-height: 1000px;
 }
 
 header {
@@ -32,7 +28,7 @@ a { color: #a3a3a3; }
 
 /* Styling for annotation elements */
 #explanation {
-  height: 200px;
+  height: 150px;
   margin: 10px 10%;
 }
 
@@ -64,6 +60,7 @@ li.step-link {
   text-decoration: none;
   border-radius: 5px;
   font-size: 15px;
+  line-height: 15px;
 }
 
 li.step-link:hover {
@@ -206,7 +203,6 @@ div.arrow-right:hover {
 /* Styling for the Country Selector*/
 
 #country-selector {
-  margin-bottom: 20px;
   /* width: 300px; */
   float: right;
 }
