@@ -1,7 +1,5 @@
 // TODO:
 // package all under namespace
-// complete steps
-// fix all fixme and todo items
 
 // Alert for not supported browsers
 if(!document.createElementNS || !document.createElementNS('http://www.w3.org/2000/svg','svg').createSVGRect){
@@ -106,8 +104,6 @@ function ready(error, world, visas, countryCommunities, filterCountries) {
     }
   });
 
-  // TODO: delete if redundant
-  // Viz.set("visas", visas);
   Viz.set("visaIDs", visaIDs);
   Viz.set("countryData", countryData);
 
@@ -440,7 +436,6 @@ function selectCountry(selectedCountry){
 }
 
 function texboxPickCountry(event, selection) {
-  // TODO: check if the selected country exists
   var selectedCountry = Viz.get("countryData").filter(function(d){ return d.properties.name == selection.value; })[0];
   selectCountry(selectedCountry);
   drawResetTypeahead();
