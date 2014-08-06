@@ -495,7 +495,6 @@ function drawVisaPercLegend() {
 
   // A position encoding for the legend
   var x = d3.scale.linear()
-      //.domain(d3.extent(Viz.get("visaSizePercentiles")))
       .domain([0, 1])
       .range([0, 240]);
 
@@ -520,7 +519,6 @@ function drawVisaPercLegend() {
       .attr("width", function(d) { return d.x1 - d.x0; })
       .style("fill", function(d) { return d.z; })
       .on("mousemove", function(d,i) {
-        // FIXME : what to say on the tooltip
         var percValues = Viz.get("visaSizePercentileValues");
         var tooltipVal = i ? (i < percentiles.length ? "Between " + d3.round(percValues[i-1]) + " and " + d3.round(percValues[i])
             : "More than " + d3.round(percValues[percentiles.length-1]))
@@ -656,11 +654,14 @@ function switchAnnotation(newStep) {
 
 // Initial view with countries colored by visa sums
 function drawVisaSumsDefault() {
+  stopAnimation();
   Viz.set("mapState", "visaSums");
   paintVisaSums();
 
-  // De-select country selection
-  resetTypeahead();
+  // De-select country selection - with a delay to make sure animations don't interfere
+  setTimeout(function() {
+    resetTypeahead();
+  }, 1500);
 
   // Update CSS
   d3.select("button.overall").classed("active", true);
@@ -670,11 +671,14 @@ function drawVisaSumsDefault() {
 
 // Default view for countries colored by communities
 function drawCommunitiesDefault() {
+  stopAnimation();
   Viz.set("mapState", "community");
   paintCommunities();
 
-  // De-select country selection
-  resetTypeahead();
+  // De-select country selection - with a delay to make sure animations don't interfere
+  setTimeout(function() {
+    resetTypeahead();
+  }, 1500);
 
   // Update CSS
   d3.select("button.overall").classed("active", false);
