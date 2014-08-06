@@ -408,7 +408,6 @@ function selectCountry(selectedCountry){
     // Return the previous selected country to original color
     if (Viz.has("previousCountry")) {
       d3.select(".country.c" + Viz.get("previousCountry").visaID)
-        .transition().duration(500)
         .style("opacity", 1)
         .style("fill", fillCommunityColor);
     }
@@ -566,7 +565,7 @@ function showSelectionLegend() {
   // Paint typeahead to indicate selectio
   d3.select(".typeahead.tt-input")
     // first paint to white, else transition starts from black - due to initial transparent
-    .style("background-color", "white")
+    .style("background-color", "#ffffff")
     .transition().duration(750)
     .style("background-color", "#ff7f0e");
 }
@@ -617,7 +616,7 @@ function drawResetTypeahead() {
       .attr("style", "left:" + (coords.left + coords.width - 10 + $(window).scrollLeft()) + "px; top:" + (coords.top + coords.height/6 + $(window).scrollTop()) + "px");
 }
 
-// On user interaction, stop ongoing animations
+// On user interaction, stop ongoing animations by clearing timers
 function stopAnimation() {
   if (Viz.has("timer")) {
     clearTimeout(Viz.get("timer"));
@@ -692,19 +691,19 @@ steps.step1 = function() {
 };
 
 /**
-  * To workaround D3's transition limitation of "Only one transition may be active on a given element at a given time"
-  * .. country colors are set to default state initiall without transition
-  * .. then new color change is applied with transition
-  * (else the colors become off due to the cancelation of transition in paintVisaSums function)
+  * Highlight EU countries and NZ - highest amount of visa-free
+  * first find those highest amount of visa-free countries by the color
+  * then lower the opacities of all countries but these
 */
 steps.step2 = function() {
   // In case player interacted and interfered the presentation
   drawVisaSumsDefault();
 
   /**
-    * Highlight EU countries and NZ - highest amount of visa-free
-    * first find those highest amount of visa-free countries by the color
-    * then lower the opacities of all countries but these
+    * To workaround D3's transition limitation of "Only one transition may be active on a given element at a given time"
+    * .. country colors are set to default state initiall without transition
+    * .. then new color change is applied with transition
+    * (else the colors become off due to the cancelation of transition in paintVisaSums function)
   */
   var c = visaSizeColor.range()[visaSizeColor.range().length -1];
   d3.selectAll(".country")
@@ -721,12 +720,17 @@ steps.step2 = function() {
     .style("fill", fillVisaSumsColor);
 };
 
+/**
+  * Select couple of EU countries one by one
+  * .. to show the common visa-free countries of each
+*/
 steps.step3 = function() {
   // In case player interacted and interfered the presentation
   drawVisaSumsDefault();
 
   var EUcountries = ['Germany', 'Italy', 'United Kingdom', 'Spain', 'Sweden'];
 
+  // Timeout to make sure smooth transitions while looping selection of countries
   (function selectionAnimationLoop (i) {
     if (!i || Viz.has("timer")) {
       Viz.set("timer", setTimeout(function() {
@@ -741,10 +745,12 @@ steps.step3 = function() {
       }, 1000));
     }
   })(0);
-
-  //$('.typeahead').val("Turkey").trigger('typeahead:selected', {"value": "Turkey"});
 }
 
+/**
+  * Highlight few visa-free countries of Afghanistan
+  * .. via zoom-in and zoom-out
+*/
 steps.step4 = function() {
   var delay = 1500;
 
@@ -754,6 +760,7 @@ steps.step4 = function() {
   // In case player interacted and interfered the presentation
   drawVisaSumsDefault();
 
+  // Delays are increasing linearly - to make sure smooth presentation animation
   setTimeout(function() {
     zoomToCountryName("Afghanistan");
   }, delay);
@@ -765,7 +772,21 @@ steps.step4 = function() {
   }, delay*3);
 }
 
-steps.step5;
+// Display community colors
+steps.step5 = function() {
+  drawCommunitiesDefault();
+}
+
+// Display several communities in Middle-East
+steps.step6 = function() {
+  drawCommunitiesDefault();
+  zoomToCountryName("Iraq");
+}
+
+// Display Pink Community
+steps.step7 = function() {
+  drawCommunitiesDefault();
+}
 
 // Helper functions
 
